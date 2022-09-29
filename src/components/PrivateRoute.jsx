@@ -1,12 +1,23 @@
-import {Navigate, Outlet, } from "react-router-dom";
-import React from "react";
+import {Navigate, Outlet, useNavigate,} from "react-router-dom";
+import React, {useState} from "react";
 import {useAuthStatus} from "../hooks/useAuthStatus";
-import AuthService from "../services/auth.service";
+import Profile from "../pages/Profile";
 
 const PrivateRoute =  () => {
-    const loggedIn = useAuthStatus().loggedIn
+    const navigate = useNavigate();
+    const [loggedIn,setLoggedIn] = useState(false)
+    async function switchPage(){
+        const vara = await useAuthStatus()
+        setLoggedIn(vara)
+        console.log(loggedIn)
+        if(loggedIn===true){
+            return navigate('/profile')
+        }else {
+            return navigate('/sign-in')
+        }
+    }
 
-    return loggedIn ? <Outlet/> : <Navigate to={'/sign-in'}/>
+switchPage()
 
 }
 

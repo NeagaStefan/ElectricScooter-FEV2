@@ -5,11 +5,15 @@ import CustomerService from "../services/CustomerService";
 import {toast} from "react-toastify";
 
 function Profile() {
-    const [formData,setFormData] =useState({
+    const [formData,setFormData] = useState({})
+    try{
+        setFormData({
         name: AuthService.getCurrentUser().username,
         email: AuthService.getCurrentUser().email,
-    })
-    const[changeDetails,setChangeDetails]=useState(false)
+    })}catch (error){
+        toast.error("You are not logged in")
+    }
+    const[changeDetails,setChangeDetails] = useState(false)
     const navigate= useNavigate()
 
     const {name, email} = formData
