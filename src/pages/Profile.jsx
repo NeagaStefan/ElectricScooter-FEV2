@@ -1,29 +1,34 @@
 import React, {useState} from 'react'
 import AuthService from "../services/auth.service";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import CustomerService from "../services/CustomerService";
 import {toast} from "react-toastify";
 
 function Profile() {
-    const [formData,setFormData] = useState({})
-    try{
-        setFormData({
-        name: AuthService.getCurrentUser().username,
-        email: AuthService.getCurrentUser().email,
-    })}catch (error){
-        toast.error("You are not logged in")
+    const [changeDetails, setChangeDetails] = useState(false)
+    const [formData, setFormData] = useState({})
+    const navigate = useNavigate()
+    if (formData.name == null) {
+        try {
+            setFormData({
+                name: AuthService.getCurrentUser().username,
+                email: AuthService.getCurrentUser().email,
+            })
+            console.log(formData)
+        } catch (error) {
+            toast.error("You are not logged in")
+            return <Navigate to={'/sign-in'}/>
+
+        }
     }
-    const[changeDetails,setChangeDetails] = useState(false)
-    const navigate= useNavigate()
-
     const {name, email} = formData
-
-    const onLogout =()=> {
+    const onLogout = () => {
         AuthService.logout()
         navigate('/sign-in')
-    }
+}
 
-    const onSubmit =async () =>{
+    const onSubmit = async (event) =>{
+        event.preventDefault()
         try {
             if(AuthService.getCurrentUser().username!== name){
                 await CustomerService.updateUser(email, {username:name})
@@ -33,6 +38,7 @@ function Profile() {
             toast.error('Could not update profile details')
         }
     }
+
     const onChange = (e)=> {
         setFormData((prevState)=>({
             ...prevState,
@@ -62,13 +68,13 @@ function Profile() {
                                 className={!changeDetails ? "profileName":'profileNameActive'}
                                 disabled={!changeDetails}
                                 value={name}
-                                onChange={onChange}
+                                onChange={()=>onChange}
                          />
                          <input type ="text" id={"email"}
                                 className={!changeDetails ? "profileEmail":'profileEmailActive'}
                                 disabled={!changeDetails}
                                 value={email}
-                                onChange={onChange}
+                                onChange={()=>onChange}
                          />
                      </form>
                  </div>
