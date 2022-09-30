@@ -7,6 +7,7 @@ import AuthService from "../services/auth.service";
 function History() {
 
     const [history, setHistory] = useState([])
+    const data =[{"name":"test1"},{"name":"test2"}];
     const [userName, setUserName] = useState('')
     async function setUserNameF(){
         return  await AuthService.getCurrentUser().username
@@ -18,37 +19,33 @@ function History() {
         try {
              HistoryService.getHistoryByUserName(userName).then(response => {
                 setHistory(response.data)
+                 // renderHistory()
             })
             } catch (error) {
                 toast.error("Error fetching data for you")
             }
 
+
         }
 
-
-    const renderHistory = () => {
-        console.log(history)
-        history.map(
-            history =>
-                <tr key={history.rentalId}>
-                    <td>{history.rentalId}</td>
-                    <td>{history.scooterId}</td>
-                    <td>{history.userName}</td>
-                    <td>{history.timeSpent}</td>
-                    <td>{history.price}</td>
-                    <td>{history.startDate}</td>
-                    <td>{history.stopDate}</td>
-                    <td>{history.totalPrice}</td>
-                </tr>
-        )
-
-    }
+    const renderHistory = (
+        history.map((history) => <tr key={history.rentalId}>
+            <td>{history.rentalId}</td>
+            <td>{history.scooterId}</td>
+            <td>{history.userName}</td>
+            <td>{history.timeSpent}</td>
+            <td>{history.price}</td>
+            <td>{history.startDate}</td>
+            <td>{history.stopDate}</td>
+            <td>{history.totalPrice}</td>
+        </tr>)
+    )
 
     return (
         <div className={"historysAvailable"}>
             <h1 className={"text-center"}>Your rental history</h1>
             <div className={"row"}>
-                <Table striped bordered hover variant="dark">
+                <Table className={" striped bordered hover"} variant="dark">
                     <thead>
                     <tr>
                         <th> Rental Id</th>
@@ -62,7 +59,8 @@ function History() {
                     </tr>
                     </thead>
                     <tbody className={"table table-striped table-bordered"}>
-                    {renderHistory()}
+
+                    {renderHistory}
                     </tbody>
                 </Table>
             </div>
