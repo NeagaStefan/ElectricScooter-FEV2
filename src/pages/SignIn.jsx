@@ -1,7 +1,7 @@
 import {useRef, useState} from "react";
 import React from 'react'
 import {toast} from "react-toastify"
-import {Link, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {ReactComponent as ArrowRightIcon} from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import AuthService from "../services/auth.service";
@@ -9,8 +9,12 @@ import OAuth from "../components/OAuth";
 
 
 function SignIn() {
-    const form = useRef();
     const navigate = useNavigate();
+    if (AuthService.getCurrentUser()){
+        return <Navigate to={'/'}/>
+    }
+    const form = useRef();
+
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
