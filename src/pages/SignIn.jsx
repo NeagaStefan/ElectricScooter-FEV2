@@ -11,6 +11,7 @@ import OAuth from "../components/OAuth";
 function SignIn() {
     const navigate = useNavigate();
     if (AuthService.getCurrentUser()){
+        toast.error("If you want to log in in another account, please log out first")
         return <Navigate to={'/'}/>
     }
     const form = useRef();
