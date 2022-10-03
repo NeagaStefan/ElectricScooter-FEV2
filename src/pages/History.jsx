@@ -3,13 +3,17 @@ import {toast} from "react-toastify";
 import HistoryService from "../services/HistoryService";
 import Table from 'react-bootstrap/Table';
 import AuthService from "../services/auth.service";
+import {Navigate, useNavigate} from "react-router-dom";
 
 
 function History() {
 
     const [history, setHistory] = useState([])
     const [userName, setUserName] = useState('')
-
+    if (!AuthService.getCurrentUser()){
+        toast.error("Please log in first")
+        return <Navigate to={'/sign-in'}/>
+    }
 
     async function setUserNameF(){
         return  await AuthService.getCurrentUser().username
@@ -44,10 +48,10 @@ function History() {
     )
 
     return (
-        <div className={"historysAvailable"}>
+        <div className={"container"}>
             <h1 className={"text-center"}>Your rental history</h1>
-            <div className={"row"}>
-                <Table className={" striped bordered hover"} variant="dark">
+            <div className={"table-responsive"}>
+                <Table className={" table"} >
                     <thead>
                     <tr>
                         <th> Rental Id</th>

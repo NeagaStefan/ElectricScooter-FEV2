@@ -88,6 +88,7 @@ function SignIn() {
                 <OAuth/>
                 <Link to="/sign-up " className={"registerLink"}>
                     Sign Up instead
+
                 </Link>
             </div>
         </>

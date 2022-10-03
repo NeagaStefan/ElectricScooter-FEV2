@@ -5,6 +5,7 @@ const DropDownLocations=({label,options, selectedPos, onSelectedChange}) => {
     const [open, setOpen] = useState(false);
     const ref = useRef();
 
+
     useEffect(() => {
         const onBodyClick = (event)=>{
             if (ref.current.contains(event.target)) {
@@ -36,6 +37,7 @@ const DropDownLocations=({label,options, selectedPos, onSelectedChange}) => {
             </div>
         )
     })
+
     if(selectedPos){
         return (
             <h1>

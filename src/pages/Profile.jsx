@@ -7,7 +7,12 @@ import {toast} from "react-toastify";
 function Profile() {
     const [changeDetails, setChangeDetails] = useState(false)
     const [formData, setFormData] = useState({})
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+    if (!AuthService.getCurrentUser()){
+        toast.error("Please log in first")
+        return <Navigate to={'/sign-in'}/>
+    }
     if (formData.name == null) {
         try {
             setFormData({

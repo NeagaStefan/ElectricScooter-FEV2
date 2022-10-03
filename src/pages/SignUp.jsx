@@ -1,7 +1,7 @@
 import {useState} from "react";
 import React from 'react'
 import {toast} from "react-toastify";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {ReactComponent as ArrowRightIcon} from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import AuthService from "../services/auth.service";
@@ -11,6 +11,11 @@ import OAuth from "../components/OAuth";
 function SignUp() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    if (AuthService.getCurrentUser()){
+        toast.error("Please log out first")
+        return <Navigate to={'/profile'}/>
+    }
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
