@@ -16,6 +16,11 @@ function SignIn() {
     }
     const form = useRef();
 
+    const onClick=() => {
+       navigate('/sign-up')
+        window.location.reload()
+    }
+
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
@@ -86,9 +91,8 @@ function SignIn() {
                     </div>
                 </form>
                 <OAuth/>
-                <Link to="/sign-up " className={"registerLink"}>
+                <Link  className={"registerLink"} onClick={onClick}>
                     Sign Up instead
-
                 </Link>
             </div>
         </>

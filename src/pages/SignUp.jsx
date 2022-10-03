@@ -15,6 +15,10 @@ function SignUp() {
         toast.error("Please log out first")
         return <Navigate to={'/profile'}/>
     }
+    const onClick=() => {
+        navigate('/sign-in')
+        window.location.reload()
+    }
 
     const [formData, setFormData] = useState({
         email: '',
@@ -89,7 +93,7 @@ return (
 
             <OAuth/>
 
-            <Link to="/sign-in " className={"registerLink"}>
+            <Link  className={"registerLink"} onClick={onClick}>
                 Sign In instead
             </Link>
         </div>
