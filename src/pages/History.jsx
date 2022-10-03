@@ -4,11 +4,13 @@ import HistoryService from "../services/HistoryService";
 import Table from 'react-bootstrap/Table';
 import AuthService from "../services/auth.service";
 
+
 function History() {
 
     const [history, setHistory] = useState([])
-    const data =[{"name":"test1"},{"name":"test2"}];
     const [userName, setUserName] = useState('')
+
+
     async function setUserNameF(){
         return  await AuthService.getCurrentUser().username
     }
