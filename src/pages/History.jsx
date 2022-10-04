@@ -31,7 +31,6 @@ function History() {
 
     useEffect(()=>{
         try {
-            //todo un counter cu butoane si  la request dau numarul paginii pe care o vreau
             HistoryService.getHistoryByUserName(userName, page).then(response => {
 
                 if(response.data) {
