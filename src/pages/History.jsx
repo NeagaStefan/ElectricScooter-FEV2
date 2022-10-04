@@ -4,13 +4,17 @@ import HistoryService from "../services/HistoryService";
 import Table from 'react-bootstrap/Table';
 import AuthService from "../services/auth.service";
 import {Navigate, useNavigate} from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import "../styles.css";
 
+const PER_PAGE = 10;
 
 function History() {
 
     const [history, setHistory] = useState([])
     const [userName, setUserName] = useState('')
     const [page, setPage] = useState(0)
+    const [pageNum, setPageNum]= useState(1)
 
     if (!AuthService.getCurrentUser()) {
         toast.error("Please log in first")
@@ -29,9 +33,12 @@ function History() {
         try {
             //todo un counter cu butoane si  la request dau numarul paginii pe care o vreau
             HistoryService.getHistoryByUserName(userName, page).then(response => {
-                console.log(response.data)
-                console.log(page)
-                setHistory(response.data.histories)
+
+                if(response.data) {
+                    setHistory(response.data.histories)
+                    setPageNum(response.data.totalPages)
+                }
+                else return("you have no data")
                 // renderHistory()
 
             })
@@ -39,6 +46,17 @@ function History() {
             toast.error("Error fetching data for you")
         }
     },[userName,page])
+
+
+    function handlePageClick({ selected: selectedPage }) {
+            setPage(selectedPage);
+    }
+
+    const offset = page * PER_PAGE;
+
+    const currentPageData = history
+        .slice(offset, offset + PER_PAGE)
+        .map(({ thumburl }) => <img src={thumburl} />);
 
     const renderHistory = (
         history.map((history) => <tr key={history.rentalId}>
@@ -52,22 +70,13 @@ function History() {
             <td>{history.totalPrice}</td>
         </tr>)
     )
-
-    const onClickDecrease =()=> {
-        setPage(page - 1)
-        console.log(page)
-
-    }
-
-    const onClickIncrease =()=>  {
-        setPage(page + 1)
-        console.log(page)
-
-    }
+    console.log(history)
 
     return (
         <div className={"container"}>
             <h1 className={"text-center"}>Your rental history</h1>
+
+            {history.length !=0 &&
             <div className={"table-responsive"}>
                 <Table className={" table"}>
                     <thead>
@@ -88,13 +97,28 @@ function History() {
 
                     </tbody>
                 </Table>
-                {page > 0 &&
-                    <button onClick={onClickDecrease}>Previous</button>
-                }
-                {
-                    <button onClick={onClickIncrease}>Next</button>
-                }
+                <div className="App">
+                    <ReactPaginate
+                        previousLabel={"← Previous"}
+                        nextLabel={"Next →"}
+                        pageCount={pageNum}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"pagination__link"}
+                        nextLinkClassName={"pagination__link"}
+                        disabledClassName={"pagination__link--disabled"}
+                        activeClassName={"pagination__link--active"}
+                    />
+                    {currentPageData}
+                </div>
+
             </div>
+}
+            {history.length ==0 &&
+                <div>
+                    <h2>You did not rent a scooter so far</h2>
+                </div>
+            }
         </div>
     )
 }
