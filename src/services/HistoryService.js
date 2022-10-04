@@ -23,8 +23,8 @@ class HistoryService  {
         return axios.delete(HISTORY_URL+`/historys/${historyId}`,{headers: authHeader()})
     }
 
-    async getHistoryByUserName(userName) {
-        return await axios.get(HISTORY_URL + `/user/${userName}`,{headers: authHeader()})
+    async getHistoryByUserName(userName,page) {
+        return await axios.get(HISTORY_URL + `/user/${userName}/?page=${page}`,{headers: authHeader()})
     }
 
 }

@@ -10,29 +10,35 @@ function History() {
 
     const [history, setHistory] = useState([])
     const [userName, setUserName] = useState('')
-    if (!AuthService.getCurrentUser()){
+    const [page, setPage] = useState(0)
+
+    if (!AuthService.getCurrentUser()) {
         toast.error("Please log in first")
         return <Navigate to={'/sign-in'}/>
     }
+    useEffect(() => {
+        setUserNameF().then(r => setUserName(r))
+    },[userName])
 
-    async function setUserNameF(){
-        return  await AuthService.getCurrentUser().username
+    async function setUserNameF() {
+        return await AuthService.getCurrentUser().username
     }
 
-    setUserNameF().then(r=>setUserName(r))
 
-    if (history.length===0) {
+    useEffect(()=>{
         try {
-             HistoryService.getHistoryByUserName(userName).then(response => {
-                setHistory(response.data)
-                 // renderHistory()
+            //todo un counter cu butoane si  la request dau numarul paginii pe care o vreau
+            HistoryService.getHistoryByUserName(userName, page).then(response => {
+                console.log(response.data)
+                console.log(page)
+                setHistory(response.data.histories)
+                // renderHistory()
+
             })
-            } catch (error) {
-                toast.error("Error fetching data for you")
-            }
-
-
+        } catch (error) {
+            toast.error("Error fetching data for you")
         }
+    },[userName,page])
 
     const renderHistory = (
         history.map((history) => <tr key={history.rentalId}>
@@ -47,11 +53,23 @@ function History() {
         </tr>)
     )
 
+    const onClickDecrease =()=> {
+        setPage(page - 1)
+        console.log(page)
+
+    }
+
+    const onClickIncrease =()=>  {
+        setPage(page + 1)
+        console.log(page)
+
+    }
+
     return (
         <div className={"container"}>
             <h1 className={"text-center"}>Your rental history</h1>
             <div className={"table-responsive"}>
-                <Table className={" table"} >
+                <Table className={" table"}>
                     <thead>
                     <tr>
                         <th> Rental Id</th>
@@ -67,8 +85,15 @@ function History() {
                     <tbody className={"table table-striped table-bordered"}>
 
                     {renderHistory}
+
                     </tbody>
                 </Table>
+                {page > 0 &&
+                    <button onClick={onClickDecrease}>Previous</button>
+                }
+                {
+                    <button onClick={onClickIncrease}>Next</button>
+                }
             </div>
         </div>
     )

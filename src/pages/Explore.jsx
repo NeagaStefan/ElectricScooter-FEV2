@@ -75,7 +75,6 @@ function Explore() {
         },
     ]
 
-
     const [userName, setUserName] = useState('')
     const [scootersAvailable, setScootersAvailable] = useState([])
     const [selected, setSelected] = useState({})
