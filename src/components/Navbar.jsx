@@ -41,7 +41,7 @@ return (
                     <HistoryIcon fill={pathMatchRoute('/history')?'#2c2c2c': '#8f8f8f'} width={'36px'} height={'36px'}/>
                     <p className={pathMatchRoute('/history')? 'navbarListItemNameActive':'navbarListItemName'}>History</p>
                 </li>
-                { role=='ROLE_ADMIN' &&
+                { role==='ROLE_ADMIN' &&
                 <li className={"navbarListItem"} onClick={()=>navigate('/admin')}>
                     <PersonOutlineIcon fill={pathMatchRoute('/admin')?'#2c2c2c': '#8f8f8f'} width={'36px'} height={'36px'}/>
                     <p className={pathMatchRoute('/admin') ? 'navbarListItemNameActive':'navbarListItemName'}>Admin</p>

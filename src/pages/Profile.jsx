@@ -51,8 +51,8 @@ function Profile() {
         }))
     }
 //todo ceasul sa mearga pana dai stop indiferent ca ai plecat pe alta pagina sau nu, si sa se nu poti da log out fara sa il opresti
-   //todo paginile pnetru admin, cu componenta de navbad doar pentru el si cu pagini separate si securizate
     //todo de facut sa mearga update-ul de detalii si sa nu poti inchiria daca nu ai datele cardului
+
     return (
          <div className={"profile"}>
              <header className={"profileHeader"}>

@@ -1,6 +1,6 @@
 // noinspection DuplicatedCode
 
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ScooterService from "../services/ScooterService";
 import HeaderComponent from "./HeaderComponent";
 import {useLocation, useNavigate} from "react-router-dom";

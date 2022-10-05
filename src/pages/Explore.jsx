@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import AuthService from "../services/auth.service";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import customerService from "../services/CustomerService";
 import DropDownComponent from "../components/DropDownComponent";

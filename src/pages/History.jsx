@@ -52,11 +52,10 @@ function History() {
 
     }
 
-    const offset = page * PER_PAGE;
 
     const currentPageData = history
-        .slice(offset, offset + PER_PAGE)
-        .map(({ thumburl }) => <img src={thumburl} />);
+        .slice( PER_PAGE)
+        .map(({ thumburl }) => <img src={thumburl} alt={"ceva imagine"} />);
 
     const renderHistory = (
         history.map((history) => <tr key={history.rentalId}>
@@ -76,9 +75,9 @@ function History() {
         <div className={"container"}>
             <h1 className={"text-center"}>Your rental history</h1>
 
-            {history.length !=0 &&
+            {history.length !== 0 &&
             <div className={"table-responsive"}>
-                <Table className={" table"}>
+                <Table className={"table"}>
                     <thead>
                     <tr>
                         <th> Rental Id</th>
@@ -92,9 +91,7 @@ function History() {
                     </tr>
                     </thead>
                     <tbody className={"table table-striped table-bordered"}>
-
                     {renderHistory}
-
                     </tbody>
                 </Table>
                 <div className="App">
@@ -111,10 +108,9 @@ function History() {
                     />
                     {currentPageData}
                 </div>
-
             </div>
 }
-            {history.length ==0 &&
+            {history.length === 0 &&
                 <div>
                     <h2>You did not rent a scooter so far</h2>
                 </div>

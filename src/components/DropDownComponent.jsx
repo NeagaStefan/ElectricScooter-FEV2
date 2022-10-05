@@ -1,6 +1,4 @@
 import React,{useState,useEffect, useRef} from 'react'
-import AuthService from "../services/auth.service";
-import ScooterService from "../services/ScooterService";
 
 const DropDownComponent = ({label,options, selected, onSelectedChange}) => {
     const [open, setOpen] = useState(false);
