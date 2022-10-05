@@ -5,8 +5,8 @@ const SCOOTERS_URL = "http://localhost:9000"
 
 class ScooterService {
 
-    getAllScooters(){
-        return axios.get(SCOOTERS_URL+'/scooters/admin',{headers: authHeader()})
+    getAllScooters(page){
+        return axios.get(SCOOTERS_URL+`/scooters/admin/?page=${page}`,{headers: authHeader()})
     }
 
     getAvailableScooters(){

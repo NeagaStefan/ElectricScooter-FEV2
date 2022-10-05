@@ -1,68 +1,90 @@
 import React, {useEffect, useState} from "react";
 import ScooterService from "../services/ScooterService";
 import '../styles.css'
+import Table from 'react-bootstrap/Table';
 import {useNavigate} from 'react-router-dom'
+import ReactPaginate from "react-paginate";
+import "../styles.css";
+import {toast} from "react-toastify";
+
+const PER_PAGE = 10;
 
 const Admin = () =>{
     const [term,setTerm] = useState('')
     const [scooters,setScooters]= useState([])
+    const [page, setPage] = useState(0)
+    const [pageNum, setPageNum]= useState(1)
     let navigate = useNavigate();
 
     useEffect(() => {
-        const searchScooters = async () => {
-            const {data} = await ScooterService.getAllScooters()
-            setScooters(data);
-        }
+            try {
+                console.log(page)
+                ScooterService.getAllScooters(page).then(response=> {
+                if (response.data) {
+                    setScooters(response.data.scooters);
+                    setPageNum(response.data.totalPages)
+                } else return ("you have no data")
+                })
+            } catch (error) {
+                toast.error("Error fetching data for you")
+            }
 
-        const timeoutId = setTimeout(() => {
-            searchScooters()
+    },[page]);
 
-        }, 100);
-        return () => {
-            clearTimeout(timeoutId);
-        }
-    },[]);
+    function handlePageClick({ selected: selectedPage }) {
+        setPage(selectedPage);
+
+    }
+
+    const offset = page * PER_PAGE;
+
+    const currentPageData = scooters
+        .slice(offset, offset + PER_PAGE)
+        .map(({ thumburl }) => <img src={thumburl} />);
 
     const onPositionClick = async () => {
         const {data} = await ScooterService.getScootersByPosition(term)
         setScooters(data);
-        reRenderList()
+
     }
+
     const onIdClick = async () =>{
         const {data} = await ScooterService.getScooterById(term)
         setScooters(data);
-        reRenderList()
+
     }
+
     const onStatusClick = async () =>{
         const {data} = await ScooterService.getScootersByStatus(term)
         setScooters(data);
-        reRenderList();
+
     }
+
     const onPriceClick = async () =>{
         const {data} = await ScooterService.getScootersByBattery(term)
         setScooters(data);
-        reRenderList()
+
     }
-    const editScooter = (scooterId)=>{
-        navigate("/scooter/edit",{ state: {scooterId:scooterId}}
-    );
+
+    const editScooter = (scooterId)=> {
+        navigate("/scooter/edit", {state: {scooterId: scooterId}});
     }
+
     const deleteScooter = async (scooterId)=> {
         ScooterService.deleteScooterById(scooterId).then(async () => {
             const {data} = await ScooterService.getAllScooters()
             setScooters(data)
-            reRenderList()
+
         })
     }
 
     const  addScooter=()=>{
-        navigate('/employee')
+        navigate('/scooter')
     }
 
-    const reRenderList = () => {
-        if (scooters[0]){
-            return scooters.map((scooter) => {
-                return (
+    const renderList =  (
+            scooters.map((scooter) =>
+
                     <tr key={scooter.scooterId}>
                         <td>{scooter.scooterId}</td>
                         <td>{scooter.scooterModel}</td>
@@ -78,16 +100,13 @@ const Admin = () =>{
                             </button>
                         </td>
                     </tr>
-                )
-            })
-        }else return null;
 
-
-    }
+            )
+    )
 
 
     return(
-        <div >
+        <div className={"container"}>
             <div className={"top-part"}>
                 <div className={"ui form"}>
                     <div className={"field"}>
@@ -108,7 +127,8 @@ const Admin = () =>{
                     <hr/>
                 </div>
             </div>
-            <table className={"table table-active"}>
+            <div className={"table-responsive"}>
+            <Table className={" table"}>
                 <thead>
                 <tr>
                     <td>Scooter Id</td>
@@ -120,9 +140,24 @@ const Admin = () =>{
                 </tr>
                 </thead>
                 <tbody className={"table table-striped table-bordered"}>
-                {reRenderList()}
+                {renderList}
                 </tbody>
-            </table>
+            </Table>
+                <div className="App">
+                    <ReactPaginate
+                        previousLabel={"← Previous"}
+                        nextLabel={"Next →"}
+                        pageCount={pageNum}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"pagination__link"}
+                        nextLinkClassName={"pagination__link"}
+                        disabledClassName={"pagination__link--disabled"}
+                        activeClassName={"pagination__link--active"}
+                    />
+                    {currentPageData}
+                </div>
+            </div>
 
         </div>
     )

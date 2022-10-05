@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 import HistoryService from "../services/HistoryService";
 import Table from 'react-bootstrap/Table';
 import AuthService from "../services/auth.service";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import "../styles.css";
 
@@ -20,6 +20,7 @@ function History() {
         toast.error("Please log in first")
         return <Navigate to={'/sign-in'}/>
     }
+
     useEffect(() => {
         setUserNameF().then(r => setUserName(r))
     },[userName])
@@ -27,7 +28,6 @@ function History() {
     async function setUserNameF() {
         return await AuthService.getCurrentUser().username
     }
-
 
     useEffect(()=>{
         try {
@@ -49,6 +49,7 @@ function History() {
 
     function handlePageClick({ selected: selectedPage }) {
             setPage(selectedPage);
+
     }
 
     const offset = page * PER_PAGE;
