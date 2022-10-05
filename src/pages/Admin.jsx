@@ -2,13 +2,11 @@ import React, {useEffect, useState} from "react";
 import ScooterService from "../services/ScooterService";
 import '../styles.css'
 import {useNavigate} from 'react-router-dom'
-import HeaderComponent from "../components/HeaderComponent";
-
 
 const Admin = () =>{
     const [term,setTerm] = useState('')
     const [scooters,setScooters]= useState([])
-    let history = useNavigate();
+    let navigate = useNavigate();
 
     useEffect(() => {
         const searchScooters = async () => {
@@ -46,8 +44,8 @@ const Admin = () =>{
         reRenderList()
     }
     const editScooter = (scooterId)=>{
-        history(`/scooter/${scooterId}`)
-
+        navigate("/scooter/edit",{ state: {scooterId:scooterId}}
+    );
     }
     const deleteScooter = async (scooterId)=> {
         ScooterService.deleteScooterById(scooterId).then(async () => {
@@ -58,7 +56,7 @@ const Admin = () =>{
     }
 
     const  addScooter=()=>{
-        history('/employee')
+        navigate('/employee')
     }
 
     const reRenderList = () => {
@@ -90,7 +88,6 @@ const Admin = () =>{
 
     return(
         <div >
-            <HeaderComponent/>
             <div className={"top-part"}>
                 <div className={"ui form"}>
                     <div className={"field"}>

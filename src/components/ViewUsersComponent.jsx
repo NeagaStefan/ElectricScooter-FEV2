@@ -87,7 +87,7 @@ const ViewUsersComponent = () => {
     return (
 
         <div className={"customersAvailable"}>
-            <HeaderComponent/>
+
             <h1 className={"text-center"}>Customers of the app</h1>
             <div className={"top-part"}>
                 <div className={"row"}>

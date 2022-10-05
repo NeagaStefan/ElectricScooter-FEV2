@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import CustomerService from "../services/CustomerService";
-import HeaderComponent from "./HeaderComponent";
+import {useParams} from "react-router-dom";
 
 class UpdateUserComponent extends Component {
     constructor(props) {
+        const {customer} = useParams();
         super(props)
         this.state = {
-            customerId : this.props.match.params.customerId,
+            customerId : customer,
             firstName:'',
             lastName:'',
             email:'',
@@ -64,7 +65,7 @@ class UpdateUserComponent extends Component {
     render() {
         return (
             <div>
-                <HeaderComponent/>
+
                 <div className={"container"}>
                     <div className={"row"}>
                         <div className={"card col-md-6 offset-md-3 offset-md-3"}>
