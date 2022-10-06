@@ -52,7 +52,6 @@ function History() {
 
     }
 
-
     const currentPageData = history
         .slice( PER_PAGE)
         .map(({ thumburl }) => <img src={thumburl} alt={"ceva imagine"} />);
