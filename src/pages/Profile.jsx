@@ -81,8 +81,7 @@ function Profile() {
     }
 
 //todo ceasul sa mearga pana dai stop indiferent ca ai plecat pe alta pagina sau nu, si sa se nu poti da log out fara sa il opresti
-//todo sa afiseze pretul si totalul in timpul  inchierii
-
+//todo visibility icon de refacut
 
     return (
         <div className={"profile"}>

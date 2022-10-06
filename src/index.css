@@ -37,6 +37,17 @@ button {
   outline: none;
   border: none;
 }
+.buttons{
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  position: center;
+
+}
+.buttonsContainer{
+  align-content: center;
+}
 
 .input,
 .passwordInput,
@@ -147,8 +158,13 @@ button {
     transform: rotate(360deg);
   }
 }
+.title{
+  font-size: xxx-large;
+  padding-bottom: 3rem;
+}
 
 .pageHeader {
+  text-align: center;
   font-size: 2rem;
   font-weight: 800;
 }
@@ -220,9 +236,11 @@ button {
 .showPassword {
   cursor: pointer;
   position: absolute;
-  top: -4%;
-  right: 1%;
-  padding: 1rem;
+  top: 15%;
+  right: 5%;
+ width: 24px;
+  height: 24px;
+
 }
 
 .forgotPasswordLink {
@@ -746,13 +764,29 @@ button {
   font-weight: 600;
   border-radius: 1rem;
   font-size: 1rem;
-  margin: 0.5rem 0.5rem 0 0;
+  margin: 0.5rem 0.5rem 0 9rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .formButtonActive {
   background-color: #00cc66;
+  color: #ffffff;
+}
+
+.formButtonStop {
+  padding: 0.9rem 3rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formButtonStop {
+  background-color: #f30404;
   color: #ffffff;
 }
 
@@ -833,4 +867,12 @@ button {
   margin-left: 1rem;
   font-size: 0.8rem;
   opacity: 0.75;
+}
+.numbers{
+  text-align: center;
+  font-size: 50px;
+}
+.price-tag{
+  text-align: center;
+  font-size: 50px;
 }

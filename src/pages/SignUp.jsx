@@ -3,7 +3,7 @@ import React from 'react'
 import {toast} from "react-toastify";
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import {ReactComponent as ArrowRightIcon} from "../assets/svg/keyboardArrowRightIcon.svg";
-import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import visibilityIcon from '../assets/svg/visibility-svgrepo-com.svg'
 import AuthService from "../services/auth.service";
 import OAuth from "../components/OAuth";
 
@@ -51,7 +51,7 @@ return (
         <div className={"pageContainer"}>
             <header>
                 <p className={"pageHeader"}>
-                    Welcome Back
+                    Welcome to our app
                 </p>
             </header>
             <form onSubmit={handleRegister}>

@@ -171,13 +171,14 @@ function Explore() {
                 <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
                 <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
             </div>
-            <div>
+            <div className={"price-tag"}>
                 {selected &&
-                    <div>Price :{ Math.floor((time / 60000) % 60)*selected.price+selected.price}
+                    <div>Total price: { Math.floor((time / 60000) % 60).toFixed(2)*selected.price+selected.price}
                     </div>
                 }
             </div>
-            <div className="buttons">
+            <div className={"buttonsContainer"}>
+
                 {!running &&
                     <button className={"formButtonActive"} onClick={() => {
                         onStart()
@@ -185,7 +186,7 @@ function Explore() {
                 }
                 {running && selectedPos &&
 
-                    <button type="button" className="btn btn-danger" onClick={() => {
+                    <button type="button" className={"formButtonStop"} onClick={() => {
                         setRunning(false)
                         onStop()
                         setTime(0)
@@ -198,7 +199,9 @@ function Explore() {
 
     return (
         <div>
-            <h1>Electronic scooter app</h1>
+            <h1 className={"title"}>
+                Electronic scooter app
+            </h1>
             <div className={"body"}>
                 <div className={"form-signin"}>
                     {!running &&
