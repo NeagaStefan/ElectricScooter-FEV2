@@ -6,6 +6,7 @@ import customerService from "../services/CustomerService";
 import DropDownComponent from "../components/DropDownComponent";
 import ScooterService from "../services/ScooterService";
 import DropDownLocations from "../components/DropDownLocations";
+import CustomerService from "../services/CustomerService";
 
 
 function Explore() {
@@ -81,6 +82,7 @@ function Explore() {
     const [selectedPos, setSelectedPos] = useState(options[0])
     const [time, setTime] = useState(0);
     const [running, setRunning] = useState(false);
+    const [canStart, setCanStart]= useState(false);
 
     if (!AuthService.getCurrentUser()){
         toast.error("Please log in first")
@@ -94,24 +96,40 @@ function Explore() {
         }
 
         setUserNameF().then(r => setUserName(r))
+    },[])
 
+    useEffect(()=>{
         async function setScooterAvailable() {
 
             const data = await ScooterService.getAvailableScooters()
             setSelected(data.data[0])
             return data
         }
-
         setScooterAvailable().then(r => setScootersAvailable(r.data))
         setSelected(scootersAvailable[0])
-    }, [])
+
+        async  function verifyStart () {
+            const userDetails = await CustomerService.findUser(userName);
+            if(userDetails.data.cardNumber && userDetails.data.cardExpDate && userDetails.data.cardCSV ){
+                setCanStart(true);
+            }
+        }
+        verifyStart()
+
+    }, [userName])
 
     const onStart = () => {
-        try {
-            customerService.startRenting(userName, selected.scooterId).then(
-                toast.success("The renting has started"))
-        } catch (error) {
-            toast.error(error.message)
+        console.log(canStart)
+        if(canStart===true) {
+            setRunning(true)
+            try {
+                customerService.startRenting(userName, selected.scooterId).then(
+                    toast.success("The renting has started"))
+            } catch (error) {
+                toast.error(error.message)
+            }
+        }else {
+            toast.error("Save your card details to rent")
         }
 
     }
@@ -147,15 +165,21 @@ function Explore() {
 
 
     const renderedClock = (
+
         <div className="pageContainer">
             <div className="numbers">
                 <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
                 <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
             </div>
+            <div>
+                {selected &&
+                    <div>Price :{ Math.floor((time / 60000) % 60)*selected.price+selected.price}
+                    </div>
+                }
+            </div>
             <div className="buttons">
                 {!running &&
                     <button className={"formButtonActive"} onClick={() => {
-                        setRunning(true)
                         onStart()
                     }}>Start renting</button>
                 }

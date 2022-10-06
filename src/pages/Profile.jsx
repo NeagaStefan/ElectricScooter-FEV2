@@ -79,9 +79,10 @@ function Profile() {
             [e.target.id]: e.target.value,
         }))
     }
-//todo ceasul sa mearga pana dai stop indiferent ca ai plecat pe alta pagina sau nu, si sa se nu poti da log out fara sa il opresti
 
-    //todo de facut sa mearga update-ul de detalii si sa nu poti inchiria daca nu ai datele cardului
+//todo ceasul sa mearga pana dai stop indiferent ca ai plecat pe alta pagina sau nu, si sa se nu poti da log out fara sa il opresti
+//todo sa afiseze pretul si totalul in timpul  inchierii
+
 
     return (
         <div className={"profile"}>

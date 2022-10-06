@@ -31,7 +31,7 @@ const DropDownComponent = ({label,options, selected, onSelectedChange}) => {
         return (
             <div key={option.scooterId} className={"item"}
                  onClick = {()=> onSelectedChange(option)}>
-                {option.scooterId}
+                Scooter id:{option.scooterId} price: {option.price}
             </div>
         )
     })
@@ -44,7 +44,7 @@ const DropDownComponent = ({label,options, selected, onSelectedChange}) => {
                     <div className={`ui selection dropdown ${open ? 'visible active':''}`} onClick={()=> setOpen(!open)}>
                         <i className={"dropdown icon"}></i>
                         <div className={"text"}>
-                            {selected.scooterId}
+                            Scooter id: {selected.scooterId} price: {selected.price}
                         </div>
                         <div className={`menu ${open ? 'visible transition':''}`}>
                             {renderedOptions}

@@ -58,10 +58,8 @@ function History() {
 
     const renderHistory = (
         history.map((history) => <tr key={history.rentalId}>
-            <td>{history.rentalId}</td>
             <td>{history.scooterId}</td>
             <td>{history.userName}</td>
-            <td>{history.timeSpent}</td>
             <td>{history.price}</td>
             <td>{history.startDate}</td>
             <td>{history.stopDate}</td>
@@ -79,10 +77,8 @@ function History() {
                 <Table className={"table"}>
                     <thead>
                     <tr>
-                        <th> Rental Id</th>
                         <th> Scooter Id</th>
                         <th> User name</th>
-                        <th> Time spent</th>
                         <th>Price</th>
                         <th>Start Data</th>
                         <th>Stop data</th>
