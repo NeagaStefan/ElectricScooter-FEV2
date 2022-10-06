@@ -89,10 +89,10 @@ const Admin = () => {
                 <td>{scooter.batteryPercentage}</td>
                 <td>{scooter.status}</td>
                 <td>
-                    <button className={"btn btn-info bg-info"}
+                    <button className={"formButtonActiveEdit"}
                             onClick={() => editScooter(scooter.scooterId)}>Edit
                     </button>
-                    <button style={{marginLeft: "10px"}} className={"btn btn-danger bg-danger"}
+                    <button style={{marginLeft: "10px"}} className={"formButtonStopEdit"}
                             onClick={() => deleteScooter(scooter.scooterId)}>Delete
                     </button>
                 </td>
@@ -112,15 +112,19 @@ const Admin = () => {
                                onChange={(e) => setTerm(e.target.value)}/>
                     </div>
                 </div>
-                <div className={"grid"}>
+                <div >
                     <hr/>
-                    <button className={"btn btn-success "} onClick={onPositionClick}>Search by position</button>
-                    <button className={"btn btn-success "} onClick={onIdClick}>Search by id</button>
-                    <button className={"btn btn-success "} onClick={onStatusClick}>Search by status</button>
-                    <button className={"btn btn-success "} onClick={onPriceClick}>Search battery under</button>
-                    <hr/>
-                    <button className={"btn btn-success "} onClick={addScooter}>Add scooter</button>
-                    <hr/>
+                    <div>
+                        <button className={"formButtonActiveSearch"} onClick={onPositionClick}>Search by position
+                        </button>
+                        <button className={"formButtonActiveSearch"} onClick={onIdClick}>Search by id</button>
+                        <button className={"formButtonActiveSearch"} onClick={onStatusClick}>Search by status</button>
+                        <button className={"formButtonActiveSearch"} onClick={onPriceClick}>Search battery under
+                        </button>
+                        <hr/>
+                        <button className={"formButtonActive"} onClick={addScooter}>Add scooter</button>
+                        <hr/>
+                    </div>
                 </div>
             </div>
             <div className={"table-responsive"}>

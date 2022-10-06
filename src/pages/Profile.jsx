@@ -80,8 +80,6 @@ function Profile() {
         }))
     }
 
-//todo ceasul sa mearga pana dai stop indiferent ca ai plecat pe alta pagina sau nu, si sa se nu poti da log out fara sa il opresti
-
     return (
         <div className={"profile"}>
             <header className={"profileHeader"}>

@@ -773,7 +773,33 @@ button {
   background-color: #00cc66;
   color: #ffffff;
 }
+.formButtonActiveSearch {
+  padding: 0.9rem 3rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0rem;
+  display: flow;
+}
+.formButtonActiveSearch{
+  background-color: #00cc66;
+  color: #ffffff;
+}
 
+.formButtonActiveEdit {
+  padding: 0.9rem 1rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: inline;
+}
+.formButtonActiveEdit {
+  background-color: #00cc66;
+  color: #ffffff;
+}
 .formButtonStop {
   padding: 0.9rem 3rem;
   background-color: #ffffff;
@@ -786,6 +812,19 @@ button {
   align-items: center;
 }
 .formButtonStop {
+  background-color: #f30404;
+  color: #ffffff;
+}
+.formButtonStopEdit {
+  padding: 0.9rem 1rem;
+  background-color: #ffffff;
+  font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.5rem 0 0;
+  display: inline;
+}
+.formButtonStopEdit {
   background-color: #f30404;
   color: #ffffff;
 }

@@ -87,8 +87,8 @@ class UpdateUserComponent extends Component {
                                     <div className={"form-group"}>
                                         <label>Email: </label>
                                         <input placeholder="Email" name ="email" className={"form-control"} value={this.state.email} onChange={this.changeCustomerEmailHandler}/>
-                                    <button className={"btn btn-success"} onClick={this.updateCustomer}>Save</button>
-                                    <button className={"btn btn-primary"} onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button>
+                                    <button className={"formButtonActiveEdit"} onClick={this.updateCustomer}>Save</button>
+                                    <button className={"formButtonStopEdit"} onClick={this.cancel.bind(this)} style={{marginLeft:"10px"}}>Cancel</button>
                                     </div>
                                 </form>
                             </div>

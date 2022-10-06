@@ -72,8 +72,8 @@ export default function CreateNewScooter() {
                                     <input placeholder="Price" name="price" className={"form-control"}
                                            value={scooter.price} onChange={changeScooterAllHandler}/>
                                 </div>
-                                <button className={"btn btn-success"} onClick={saveScooter}>Save</button>
-                                <button className={"btn btn-primary"} onClick={cancel}
+                                <button className={"formButtonActiveEdit"} onClick={saveScooter}>Save</button>
+                                <button className={"formButtonStopEdit"} onClick={cancel}
                                         style={{marginLeft: "10px"}}>Cancel
                                 </button>
 

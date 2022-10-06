@@ -86,8 +86,8 @@ export default function UpdateScooterComponent () {
                                         <label>Price: </label>
                                         <input placeholder="Price" name ="price" className={"form-control"} value={scooter.price} onChange={changeScooterAllHandler}/>
                                     </div>
-                                    <button className={"btn btn-success"} onClick={updateScooter}>Save</button>
-                                    <button className={"btn btn-primary"} onClick={cancel} style={{marginLeft:"10px"}}>Cancel</button>
+                                    <button className={"formButtonActiveEdit"} onClick={updateScooter}>Save</button>
+                                    <button className={"formButtonStopEdit"} onClick={cancel} style={{marginLeft:"10px"}}>Cancel</button>
 
                                 </form>
                             </div>

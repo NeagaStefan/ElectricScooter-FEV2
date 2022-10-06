@@ -8,8 +8,11 @@ import ScooterService from "../services/ScooterService";
 import DropDownLocations from "../components/DropDownLocations";
 import CustomerService from "../services/CustomerService";
 
+import usePrompt from "../hooks/useBlocker";
+
 
 function Explore() {
+
     const options = [
         {
             label: 'Astra',
@@ -83,6 +86,7 @@ function Explore() {
     const [time, setTime] = useState(0);
     const [running, setRunning] = useState(false);
     const [canStart, setCanStart]= useState(false);
+    const [isDirty,setIsDirty]= useState(false)
 
     if (!AuthService.getCurrentUser()){
         toast.error("Please log in first")
@@ -124,6 +128,7 @@ function Explore() {
             setRunning(true)
             try {
                 customerService.startRenting(userName, selected.scooterId).then(
+                    setIsDirty(true),
                     toast.success("The renting has started"))
             } catch (error) {
                 toast.error(error.message)
@@ -214,7 +219,9 @@ function Explore() {
                     }
                     {renderedClock}
 
+
                 </div>
+
             </div>
         </div>
     )
