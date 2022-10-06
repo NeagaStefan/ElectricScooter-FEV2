@@ -101,30 +101,35 @@ function Profile() {
                 </div>
                 <div className={"profileCard"}>
                     <form>
+                        <label>Username:</label>
                         <input type="text" id={"name"}
                                className={!changeDetails ? "profileName" : 'profileNameActive'}
                                disabled={!changeDetails}
                                value={name}
                                onChange={onChange}
                         />
+                        <label>Email:</label>
                         <input type="text" id={"email"}
                                className={!changeDetails ? "profileEmail" : 'profileEmailActive'}
                                disabled={!changeDetails}
                                value={email}
                                onChange={onChange}
                         />
+                        <label>Card number:</label>
                         <input type="text" id={"cardNumber"}
                                className={!changeDetails ? "profileName" : 'profileNameActive'}
                                disabled={!changeDetails}
                             value={cardNumber}
                                onChange={onChange}
                         />
+                        <label>Card CSV:</label>
                         <input type="text" id={"cardCSV"}
                                className={!changeDetails ? "profileName" : 'profileNameActive'}
                                disabled={!changeDetails}
                             value={cardCSV}
                                onChange={onChange}
                         />
+                        <label>Card expiration date:</label>
                         <input type="text" id={"cardExpDate"}
                                className={!changeDetails ? "profileName" : 'profileNameActive'}
                                disabled={!changeDetails}
